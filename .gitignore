@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+
+# ignore files inside images and outfolder
+images/**
+output/**

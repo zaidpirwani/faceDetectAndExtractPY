@@ -33,7 +33,12 @@ if __name__ == "__main__":
             rowToWrite.append(imageFileName)
             a=0
             for (x, y, w, h) in faces:
-                roi = img[int(y-(h*padding)):int(y+h+(h*padding)),int(x-(w*padding)):int(x+w+(w*padding))]
+                y1 = 0 if int(y-(h*padding))  <0 else int(y-(h*padding))
+                y2 = h if int(y+h+(h*padding))>h else int(y+h+(h*padding))
+                x1 = 0 if int(x-(w*padding))  <0 else int(x-(w*padding))
+                x2 = w if int(x+w+(w*padding))>w else int(x+w+(w*padding))
+                print (y1, ", ", y2, ", ", x1, ", ", x2)
+                roi = img[y1:y2,x1:x2]
                 if a>0:
                     break #outFileName = os.getcwd() + '/output/' + str(a) + row[0]
                 else:
