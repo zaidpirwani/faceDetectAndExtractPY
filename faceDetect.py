@@ -27,32 +27,35 @@ if __name__ == "__main__":
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         # Detect faces
         faces = face_cascade.detectMultiScale(gray, 1.2, 5)
-        # Draw rectangle around the faces
-        padding=0.2 #percentage padding
+
+        padding=0.2 #percentage padding, TODO
         if len(faces)==0:
             csvwriter.writerow([imageFileName,'NO FACE FOUND'])
             print(row[0], ": NO FACES FOUND")
         else:
             rowToWrite = []
             rowToWrite.append(imageFileName)
-            a=0
+            largestFace = 0
+            area = 0
+            i=0
             for (x, y, w, h) in faces:
+                if (w*h)>area:
+                    area=w*h
+                    largestFace = i
+                i = i+1
                 #y1 = 0 if int(y-(h*padding))  <0 else int(y-(h*padding))
                 #y2 = h if int(y+h+(h*padding))>h else int(y+h+(h*padding))
                 #x1 = 0 if int(x-(w*padding))  <0 else int(x-(w*padding))
                 #x2 = w if int(x+w+(w*padding))>w else int(x+w+(w*padding))
-                y1 = y
-                y2 = y+h
-                x1 = x
-                x2 = x+w
-                print (y1, ", ", y2, ", ", x1, ", ", x2)
-                roi = img[y1:y2,x1:x2]
-                if a>0:
-                    break #outFileName = os.getcwd() + '/output/' + str(a) + row[0]
-                else:
-                    outFileName = os.getcwd() + '/output/' + row[0]
-                cv2.imwrite(outFileName, roi)
-                rowToWrite.append(outFileName)
-                print("SAVED IMAGE: " + outFileName)
-                a=a+1
+            (x,y,w,h) = faces[largestFace]
+            y1 = y
+            y2 = y+h
+            x1 = x
+            x2 = x+w
+            print (y1, ", ", y2, ", ", x1, ", ", x2)
+            roi = img[y1:y2,x1:x2]
+            outFileName = os.getcwd() + '/output/' + row[0]
+            cv2.imwrite(outFileName, roi)
+            rowToWrite.append(outFileName)
+            print("SAVED IMAGE: " + outFileName)
             csvwriter.writerow(rowToWrite)
