@@ -13,5 +13,11 @@ this is a SIMPLE Script, no error checking, csv file checking, image file exists
 
 SHARING for personal record and archive
 
+UPDATE: 14 October
+New argument to run
+usage:
+python3 faceDetect.py CSVFILE.csv FOLDER_NAME_WHERE_IMAGES width_padding heightpadding
+width padding and height padding is uniform and in percentage, but use INTs
+
 ZAID PIRWANI
 
