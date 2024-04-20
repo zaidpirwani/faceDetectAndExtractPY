@@ -19,5 +19,25 @@ usage:
 python3 faceDetect.py CSVFILE.csv FOLDER_NAME_WHERE_IMAGES width_padding heightpadding
 width padding and height padding is uniform and in percentage, but use INTs
 
-ZAID PIRWANI
 
+UPDATE: 20 April 2024
+running again, on UBunt 22.04
+AWS, EC2, Large
+commands ran / log and process
+sudo apt update
+udo apt upgrade
+sudo apt install python3-opencv
+git clone https://github.com/zaidpirwani/faceDetectAndExtractPY
+sudo apt install unzip
+uploaded zip files of image folders via WinSCP
+uploaded csv file of image folders with single row of image names only - no header
+mkdir output
+mkdir output/g8-image
+csv file: g8.csv
+folder-name: g8-image
+
+python3 faceDetect.py g8.csv g8-image 20 20
+
+
+
+ZAID PIRWANI
